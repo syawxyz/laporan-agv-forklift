@@ -14,16 +14,3 @@ Repositori ini hanya berisi berkas pelaporan (laporan .docx, data ringkasan bate
 | `skrip/analisis_baterai.py` | Ringkasan → tabel, grafik, `hasil.json`. |
 | `skrip/tambah_bukti.py`, `skrip/tambah_baterai.py`, `skrip/docx_alat2.py` | Penyisip Lampiran D dan E ke docx (python-docx) tanpa mengubah isi lama. |
 
-## Cara menghitung ulang
-
-```bash
-cd <workspace robot>              # butuh folder logs/ berisi agv_*.csv (tidak ikut repo, 6,3 GB)
-python3 skrip/scan_baterai.py /tmp/pindai 4
-python3 skrip/analisis_baterai.py /tmp/pindai /tmp/hasil
-```
-
-## Batasan data baterai (baca sebelum mengutip)
-
-* `battery_v` = tegangan **DC-link drive MDSM** (TPDO 0x381, resolusi 0,1 V), bukan sensor baterai. Medan `battery_voltage`/`battery_current` firmware (frame 0x42A) selalu 0 karena sensor tidak ada.
-* Arus = **arus motor** per kanal (0x381, 0,1 A) dijumlahkan L+R; bukan arus baterai. Daya/energi = V·I adalah batas atas kasar untuk traksi saja (pompa garpu, PC, LiDAR tidak termasuk).
-* Kapasitas baterai (Ah) tidak diketahui → jam operasi tidak bisa dihitung.
